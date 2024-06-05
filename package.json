@@ -1,0 +1,35 @@
+{
+  "name": "ph-realtime-analytics-server",
+  "version": "1.0.0",
+  "description": "Realtme Analytics Server Apis",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "test": "jest --detectOpenHandles --verbose"
+  },
+  "keywords": [],
+  "author": "Nafiz Anam",
+  "license": "ISC",
+  "dependencies": {
+    "@joi/date": "^2.1.0",
+    "bcrypt": "^5.1.1",
+    "compression": "^1.7.4",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "helmet": "^7.1.0",
+    "joi": "^17.9.1",
+    "jsonwebtoken": "^9.0.0",
+    "mongoose": "^8.2.1",
+    "ws": "^8.17.0"
+  },
+  "devDependencies": {
+    "@types/bcrypt": "^5.0.2",
+    "@types/multer": "^1.4.11",
+    "jest": "^29.7.0",
+    "mongodb-memory-server": "^9.1.7",
+    "nodemon": "^2.0.22",
+    "supertest": "^6.3.4"
+  }
+}
