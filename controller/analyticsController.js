@@ -3,7 +3,10 @@ const AnalyticsService = require("../service/analytics.service");
 var AnalyticsController = {
     getDashboardAnalytics: async (req, res, next) => {
         try {
-            const analytics = await AnalyticsService.getDashboardAnalytics();
+            const { interval } = req?.query;
+            const analytics = await AnalyticsService.getDashboardAnalytics(
+                interval
+            );
 
             res.status(200).json({
                 status: true,
