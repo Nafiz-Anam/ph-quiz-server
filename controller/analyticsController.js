@@ -1,10 +1,9 @@
 const AnalyticsService = require("../service/analytics.service");
 
 var AnalyticsController = {
-    getAnalytics: async (req, res, next) => {
+    getDashboardAnalytics: async (req, res, next) => {
         try {
-            const { quizId } = req?.params;
-            const analytics = await AnalyticsService.getAnalytics(quizId);
+            const analytics = await AnalyticsService.getDashboardAnalytics();
 
             res.status(200).json({
                 status: true,

@@ -1,13 +1,17 @@
+const http = require("http");
+const { wss } = require("./wsServer"); // Import the WebSocket server instance
 const app = require("./app");
-const wss = require("./wsServer");
-
 const port = process.env.PORT || 8000;
-const wsPort = process.env.WS_PORT || 8080;
 
-app.listen(port, () => {
-    console.log(`Server is listening on port ${port}`);
+const server = http.createServer(app);
+
+// Integrate WebSocket server with the HTTP server
+server.on("upgrade", (request, socket, head) => {
+    wss.handleUpgrade(request, socket, head, (ws) => {
+        wss.emit("connection", ws, request);
+    });
 });
 
-wss.on("listening", () => {
-    console.log(`WebSocket server is listening on port ${wsPort}`);
+server.listen(port, () => {
+    console.log(`Server is listening on port ${port}`);
 });

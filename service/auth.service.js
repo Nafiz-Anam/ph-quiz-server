@@ -1,11 +1,17 @@
 const User = require("../schema/user.schema");
 const generateAuthToken = require("../middleware/tokenManager/token");
+const {
+    notifyAnalyticsUpdate,
+    notifyActiveUsersUpdate,
+} = require("../wsServer");
 
 const AuthService = {
     registration: async (userData) => {
         try {
             const user = new User(userData);
             let savedUser = await user.save();
+
+            notifyAnalyticsUpdate();
 
             const tokenPayload = {
                 id: savedUser._id,
@@ -30,6 +36,7 @@ const AuthService = {
         if (!isMatch) {
             throw new Error("Invalid email/password!");
         }
+        notifyActiveUsersUpdate();
 
         const tokenPayload = {
             id: user._id,

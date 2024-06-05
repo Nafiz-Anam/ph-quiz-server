@@ -22,6 +22,9 @@ const QuizResultService = {
         // Create a new quiz result
         const newResult = new QuizResult({ userId, quizId, score });
         const savedResult = await newResult.save();
+
+        notifyAnalyticsUpdate();
+
         return savedResult;
     },
 
