@@ -24,7 +24,14 @@ wss.on("connection", (ws) => {
 
 const notifyAnalyticsUpdate = async () => {
     try {
-        const analyticsData = await AnalyticsService.getDashboardAnalytics();
+        const intervals = ["hourly", "daily", "monthly", "yearly"];
+        const analyticsData = {};
+
+        for (const interval of intervals) {
+            analyticsData[interval] =
+                await AnalyticsService.getDashboardAnalytics(interval);
+        }
+
         broadcast({ type: "analyticsUpdate", payload: analyticsData });
     } catch (error) {
         console.error("Error broadcasting analytics update:", error);

@@ -30,11 +30,15 @@ const AnalyticsService = {
                     startDate = new Date(0); // default to all time if no interval is provided
             }
 
-            // Get total users count
-            const totalUsers = await User.countDocuments({});
+            // Get total users count within the specified interval
+            const totalUsers = await User.countDocuments({
+                createdAt: { $gte: startDate },
+            });
 
-            // Get total quizzes count
-            const totalQuizzes = await Quiz.countDocuments({});
+            // Get total quizzes count within the specified interval
+            const totalQuizzes = await Quiz.countDocuments({
+                createdAt: { $gte: startDate },
+            });
 
             // Get total average quiz score within the specified interval
             const totalQuizAverageScoreResult = await QuizResult.aggregate([

@@ -1,13 +1,19 @@
-version: "3.8"
+version: "3.9"
 
 services:
     app:
-        build: .
+        build:
+            context: .
+            dockerfile: Dockerfile
+        volumes:
+            - .:/app
+            - /app/node_modules
         ports:
-            - "8000:8000"
+            - "${PORT}:${PORT}"
         environment:
-            - NODE_ENV=production
-            - MONGO_URL=mongodb://mongo:27017/yourdbname
+            - NODE_ENV=development
+            - MONGODB_URI=mongodb://nafiz002:Nafiz002@mongo:27017/ph-analytics?authSource=admin
+            - ACCESS_TOKEN_SECRET=${ACCESS_TOKEN_SECRET}
         depends_on:
             - mongo
         networks:
@@ -19,6 +25,10 @@ services:
             - "27017:27017"
         volumes:
             - mongo-data:/data/db
+        environment:
+            - MONGO_INITDB_ROOT_USERNAME=${ROOT_USERNAME}
+            - MONGO_INITDB_ROOT_PASSWORD=${ROOT_PASSWORD}
+            - MONGO_INITDB_DATABASE=${DATABASE}
         networks:
             - app-network
 
@@ -27,9 +37,11 @@ services:
         ports:
             - "8081:8081"
         environment:
-            - ME_CONFIG_MONGODB_ADMINUSERNAME=root
-            - ME_CONFIG_MONGODB_ADMINPASSWORD=example
+            - ME_CONFIG_MONGODB_ADMINUSERNAME=${ROOT_USERNAME}
+            - ME_CONFIG_MONGODB_ADMINPASSWORD=${ROOT_PASSWORD}
             - ME_CONFIG_MONGODB_SERVER=mongo
+            - ME_CONFIG_MONGODB_URL=mongodb://${ROOT_USERNAME}:${ROOT_PASSWORD}@mongo:27017/
+            - ME_CONFIG_BASICAUTH=false
         depends_on:
             - mongo
         networks:
