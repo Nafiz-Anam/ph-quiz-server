@@ -17,7 +17,7 @@ var UserController = {
                 data: userDetails,
             });
         } catch (error) {
-            console.log(error);
+            //console.log(error);
             res.status(500).json({
                 status: false,
                 message: error?.message || "Internal server error!",
@@ -36,7 +36,7 @@ var UserController = {
                 meta: { count, totalPages, currentPage },
             });
         } catch (error) {
-            console.log(error);
+            //console.log(error);
             res.status(500).json({
                 status: false,
                 message: error?.message || "Internal server error!",
@@ -61,7 +61,7 @@ var UserController = {
                 message: "User updated successfully.",
             });
         } catch (error) {
-            console.log(error);
+            //console.log(error);
             res.status(500).json({
                 status: false,
                 message: error?.message || "Internal server error!",
@@ -84,7 +84,7 @@ var UserController = {
                 message: "User deleted successfully.",
             });
         } catch (error) {
-            console.log(error);
+            //console.log(error);
             res.status(500).json({
                 status: false,
                 message: error?.message || "Internal server error!",
@@ -115,7 +115,7 @@ var UserController = {
                 message: result.message,
             });
         } catch (error) {
-            console.log(error);
+            //console.log(error);
             res.status(500).json({
                 status: false,
                 message: error?.message || "Internal server error!",

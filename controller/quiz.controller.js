@@ -12,7 +12,7 @@ var QuizController = {
                 data: newQuiz,
             });
         } catch (error) {
-            console.log(error);
+            //console.log(error);
             res.status(500).json({
                 status: false,
                 message: error.message || "Internal server error!",
@@ -39,7 +39,7 @@ var QuizController = {
                 meta: { count, totalPages, currentPage },
             });
         } catch (error) {
-            console.log(error);
+            //console.log(error);
             res.status(500).json({
                 status: false,
                 message: error.message || "Internal server error!",
@@ -58,7 +58,7 @@ var QuizController = {
                 data: quiz,
             });
         } catch (error) {
-            console.log(error);
+            //console.log(error);
             res.status(500).json({
                 status: false,
                 message: error.message || "Internal server error!",
@@ -81,7 +81,7 @@ var QuizController = {
                 data: updatedQuiz,
             });
         } catch (error) {
-            console.log(error);
+            //console.log(error);
             res.status(500).json({
                 status: false,
                 message: error.message || "Internal server error!",
@@ -99,7 +99,7 @@ var QuizController = {
                 message: "Quiz deleted successfully.",
             });
         } catch (error) {
-            console.log(error);
+            //console.log(error);
             res.status(500).json({
                 status: false,
                 message: error.message || "Internal server error!",

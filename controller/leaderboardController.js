@@ -10,7 +10,7 @@ var LeaderBoardController = {
                 data: leaderBoard,
             });
         } catch (error) {
-            console.log(error);
+            //console.log(error);
             res.status(500).json({
                 status: false,
                 message: error.message || "Internal server error!",

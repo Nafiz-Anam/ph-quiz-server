@@ -4,12 +4,12 @@ const AuthService = require("../service/auth.service");
 var AuthController = {
     registration: async (req, res, next) => {
         try {
-            const { full_name, email, password } = req?.body;
-            const { user, token } = await AuthService.registration({
-                full_name,
-                email,
-                password,
-            });
+            const { full_name, email, password, role } = req?.body;
+            let userData = { full_name, email, password };
+            if (role) {
+                userData.role = role;
+            }
+            const { user, token } = await AuthService.registration(userData);
 
             const userResponse = {
                 id: user?._id,
@@ -23,7 +23,7 @@ var AuthController = {
                 data: userResponse,
             });
         } catch (error) {
-            console.log(error);
+            //console.log(error);
             res.status(500).json({
                 status: false,
                 message: error?.message || "Internal server error!",
@@ -49,7 +49,7 @@ var AuthController = {
                 data: userResponse,
             });
         } catch (error) {
-            console.log(error);
+            //console.log(error);
             res.status(500).json({
                 status: false,
                 message: error?.message || "Internal server error!",

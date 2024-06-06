@@ -8,6 +8,10 @@ const authValidation = {
                 "any.required": "Full-name is required",
                 "string.empty": "Full-name cannot be empty",
             }),
+            role: Joi.string().valid("user", "admin", "").allow(null).messages({
+                "string.base": `"Role" should be of type 'text'.`,
+                "any.only": `"Role" should be either 'user', 'admin', or empty.`,
+            }),
             email: Joi.string().required().email().messages({
                 "any.required": "Email is required",
                 "string.email": "Email must be a valid email address",
@@ -38,7 +42,7 @@ const authValidation = {
             }
             next();
         } catch (error) {
-            console.log(error);
+            //console.log(error);
             res.status(500).json({
                 status: false,
                 message: "Internal server error!",
@@ -71,7 +75,7 @@ const authValidation = {
             }
             next();
         } catch (error) {
-            console.log(error);
+            //console.log(error);
             res.status(500).json({
                 status: false,
                 message: "Internal server error!",
