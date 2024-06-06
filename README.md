@@ -54,6 +54,8 @@ This is a real-time analytics platform built using the MERN stack. The platform 
 
 3. Access the server at `http://localhost:8000`.
 
+4. Access the WebSocket server at `ws://localhost:8000`
+
 ### Running with Docker
 
 1. Build and run the Docker containers:
@@ -62,7 +64,7 @@ This is a real-time analytics platform built using the MERN stack. The platform 
     docker-compose up --build
     ```
 
-2. Access the server at `http://localhost:8000` and MongoDB Express at `http://localhost:8081`.
+2. Access the server at `http://localhost:8000`, WebSocket server at `ws://localhost:8000` and MongoDB Express at `http://localhost:8081`.
 
 ## Core Features
 
