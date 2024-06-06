@@ -25,15 +25,22 @@ var QuizResultController = {
 
     getResults: async (req, res, next) => {
         try {
-            const { userId, quizId } = req.query;
-            const results = await QuizResultService.getResults({
-                userId,
-                quizId,
-            });
+            const { userId, quizId, sortBy, sortOrder, limit, page } =
+                req.query;
+            const { results, count, totalPages, currentPage } =
+                await QuizResultService.getResults({
+                    userId,
+                    quizId,
+                    sortBy,
+                    sortOrder,
+                    limit,
+                    page,
+                });
 
             res.status(200).json({
                 status: true,
                 data: results,
+                meta: { count, totalPages, currentPage },
             });
         } catch (error) {
             console.log(error);

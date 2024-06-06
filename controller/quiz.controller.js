@@ -22,11 +22,21 @@ var QuizController = {
 
     getQuizzes: async (req, res, next) => {
         try {
-            const quizzes = await QuizService.getQuizzes();
+            const { search, sortBy, sortOrder, limit, page } = req.query;
+            const { quizzes, count, totalPages, currentPage } =
+                await QuizService.getQuizzes({
+                    search,
+                    sortBy,
+                    sortOrder,
+                    limit,
+                    page,
+                });
+
             res.status(200).json({
                 status: true,
-                message: "All quiz fetched successfully.",
+                message: "All quizzes fetched successfully.",
                 data: quizzes,
+                meta: { count, totalPages, currentPage },
             });
         } catch (error) {
             console.log(error);

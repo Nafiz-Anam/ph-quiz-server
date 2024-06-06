@@ -30,22 +30,37 @@ const QuizResultService = {
 
     getResults: async (query) => {
         try {
-            const { userId, quizId } = query;
-            let results;
+            const {
+                userId,
+                quizId,
+                sortBy = "createdAt",
+                sortOrder = "asc",
+                limit = 10,
+                page = 1,
+            } = query;
+            let filterQuery = {};
 
             if (userId) {
-                results = await QuizResult.find({ userId: userId }).populate(
-                    "quizId"
-                );
-            } else if (quizId) {
-                results = await QuizResult.find({ quizId: quizId }).populate(
-                    "userId"
-                );
-            } else {
-                throw new Error("userId or quizId is required");
+                filterQuery.userId = userId;
+            }
+            if (quizId) {
+                filterQuery.quizId = quizId;
             }
 
-            return results;
+            const results = await QuizResult.find(filterQuery)
+                .populate("quizId userId")
+                .sort({ [sortBy]: sortOrder === "asc" ? 1 : -1 })
+                .skip((page - 1) * limit)
+                .limit(parseInt(limit));
+
+            const count = await QuizResult.countDocuments(filterQuery);
+
+            return {
+                results,
+                count,
+                totalPages: Math.ceil(count / limit),
+                currentPage: parseInt(page),
+            };
         } catch (error) {
             throw error;
         }

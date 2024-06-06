@@ -11,10 +11,33 @@ const QuizService = {
         }
     },
 
-    getQuizzes: async () => {
+    getQuizzes: async (query) => {
         try {
-            const quizzes = await Quiz.find();
-            return quizzes;
+            const {
+                search = "",
+                sortBy = "createdAt",
+                sortOrder = "asc",
+                limit = 10,
+                page = 1,
+            } = query;
+            const searchQuery = search
+                ? { title: new RegExp(search, "i") }
+                : {};
+
+            const quizzes = await Quiz.find(searchQuery)
+                .sort({ [sortBy]: sortOrder === "asc" ? 1 : -1 })
+                .skip((page - 1) * limit)
+                .limit(parseInt(limit))
+                .select("-__v");
+
+            const count = await Quiz.countDocuments(searchQuery);
+
+            return {
+                quizzes,
+                count,
+                totalPages: Math.ceil(count / limit),
+                currentPage: parseInt(page),
+            };
         } catch (error) {
             throw error;
         }
