@@ -23,8 +23,8 @@ router.delete(
     userValidation.delete,
     UserController.delete
 );
-router.put(
-    "/:userId/change-password",
+router.post(
+    "/change-password",
     checkPermission,
     userValidation.changePassword,
     UserController.changePassword

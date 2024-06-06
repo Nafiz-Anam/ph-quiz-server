@@ -13,7 +13,10 @@ const quizResultSchema = new Schema({
         required: true,
     },
     score: { type: Number, required: true },
-    timestamp: { type: Date, default: Date.now },
+    createdAt: {
+        type: Date,
+        default: Date.now,
+    },
 });
 
 const QuizResult = mongoose.model("QuizResult", quizResultSchema);

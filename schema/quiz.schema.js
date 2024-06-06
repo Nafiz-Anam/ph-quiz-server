@@ -10,6 +10,10 @@ const questionSchema = new Schema({
 const quizSchema = new Schema({
     title: { type: String, default: "", required: true },
     questions: [questionSchema],
+    createdAt: {
+        type: Date,
+        default: Date.now,
+    },
 });
 
 const Quiz = mongoose.model("Quiz", quizSchema);

@@ -3,7 +3,8 @@ const QuizResultService = require("../service/quizResult.service");
 var QuizResultController = {
     submitResult: async (req, res, next) => {
         try {
-            const { userId, quizId, answers } = req?.body;
+            const userId = req?.user?.id;
+            const { quizId, answers } = req?.body;
             await QuizResultService.submitResult({
                 userId,
                 quizId,

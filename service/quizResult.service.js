@@ -1,5 +1,6 @@
 const QuizResult = require("../schema/quizResult.schema");
 const Quiz = require("../schema/quiz.schema");
+const { notifyAnalyticsUpdate } = require("../wsServer");
 
 const QuizResultService = {
     submitResult: async (resultData) => {

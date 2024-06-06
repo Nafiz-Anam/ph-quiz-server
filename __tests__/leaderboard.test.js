@@ -52,6 +52,7 @@ beforeAll(async () => {
     const quizzes = [
         {
             title: "Math Quiz",
+            description: "Test descriptions here.",
             questions: [
                 {
                     question: "What is 2+2?",
@@ -67,6 +68,7 @@ beforeAll(async () => {
         },
         {
             title: "Science Quiz",
+            description: "Test descriptions here.",
             questions: [
                 {
                     question: "What is H2O?",
@@ -106,8 +108,8 @@ beforeAll(async () => {
     }
 });
 
-describe("Leaderboard API", () => {
-    test("should fetch the leaderboard", async () => {
+describe("LeaderBoard API", () => {
+    test("should fetch the leaderBoard", async () => {
         const response = await request
             .get("/v1/leaderboard")
             .set("Authorization", `Bearer ${token}`);

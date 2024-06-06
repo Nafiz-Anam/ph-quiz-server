@@ -94,7 +94,7 @@ var UserController = {
 
     changePassword: async (req, res, next) => {
         try {
-            const userId = req?.params?.userId || req?.user?.id;
+            const userId = req?.user?.id;
             const { oldPassword, newPassword } = req.body;
 
             if (!userId || !oldPassword || !newPassword) {
