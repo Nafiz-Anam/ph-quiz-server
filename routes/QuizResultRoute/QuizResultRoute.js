@@ -6,12 +6,6 @@ const checkUserToken = require("../../middleware/tokenmanager/checkUserToken");
 router.post("/", checkUserToken, QuizResultController.submitResult);
 
 // Get quiz results by user
-router.get("/user/:userId", QuizResultController.getResultsByUser);
-
-// Get quiz results by quiz
-router.get("/quiz/:quizId", QuizResultController.getResultsByQuiz);
-
-// Get aggregated quiz results
-router.get("/aggregate/:quizId", QuizResultController.getAggregatedResults);
+router.get("/results/:userId", QuizResultController.getResults);
 
 module.exports = router;

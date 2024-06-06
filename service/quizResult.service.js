@@ -28,46 +28,23 @@ const QuizResultService = {
         return savedResult;
     },
 
-    getResultsByUser: async (userId) => {
+    getResults: async (query) => {
         try {
-            const results = await QuizResult.find({ userId: userId }).populate(
-                "quizId"
-            );
-            return results;
-        } catch (error) {
-            throw error;
-        }
-    },
+            const { userId, quizId } = query;
+            let results;
 
-    getResultsByQuiz: async (quizId) => {
-        try {
-            const results = await QuizResult.find({ quizId: quizId }).populate(
-                "userId"
-            );
-            return results;
-        } catch (error) {
-            throw error;
-        }
-    },
+            if (userId) {
+                results = await QuizResult.find({ userId: userId }).populate(
+                    "quizId"
+                );
+            } else if (quizId) {
+                results = await QuizResult.find({ quizId: quizId }).populate(
+                    "userId"
+                );
+            } else {
+                throw new Error("userId or quizId is required");
+            }
 
-    getAggregatedResults: async (quizId, interval) => {
-        try {
-            const results = await QuizResult.aggregate([
-                { $match: { quizId: quizId } },
-                {
-                    $group: {
-                        _id: {
-                            $dateToString: {
-                                format: interval,
-                                date: "$timestamp",
-                            },
-                        },
-                        averageScore: { $avg: "$score" },
-                        totalScore: { $sum: "$score" },
-                        count: { $sum: 1 },
-                    },
-                },
-            ]);
             return results;
         } catch (error) {
             throw error;
