@@ -128,6 +128,12 @@ This is a real-time analytics platform built using the MERN stack. The platform 
 
 <https://documenter.getpostman.com/view/30501718/2sA3XJjPyC>
 
+## Live API server and websocket server
+
+REST-API server: <https://ph-quiz-server.onrender.com/>
+
+WebSocket server: <ws://ph-quiz-server.onrender.com/>
+
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
