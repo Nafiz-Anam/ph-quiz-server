@@ -12,6 +12,23 @@ This is a real-time analytics platform built using the MERN stack. The platform 
 - **WebSockets**: Real-time updates for active users and analytics.
 - **Dockerized Setup**: Easily deployable with Docker and Docker Compose.
 
+## Demo login
+
+### Demo live URLs
+
+- **REST_API server url**: <https://ph-quiz-server.onrender.com/>
+- **WebSocket server url:** <ws://ph-quiz-server.onrender.com/>
+
+### Admin Credentials
+
+- **Admin Email**: <admin@gmail.com>
+- **Password**: 123456
+
+### User Credentials
+
+- **User Email**: <nafiz.anam001@gmail.com>
+- **Password**: 123456
+
 ## Installation
 
 1. Clone the repository:
@@ -130,9 +147,9 @@ This is a real-time analytics platform built using the MERN stack. The platform 
 
 ## Live API server and websocket server
 
-REST-API server: <https://ph-quiz-server.onrender.com/>
+**REST-API server url:** <https://ph-quiz-server.onrender.com/>
 
-WebSocket server: <ws://ph-quiz-server.onrender.com/>
+**WebSocket server url:** <ws://ph-quiz-server.onrender.com/>
 
 ## License
 
