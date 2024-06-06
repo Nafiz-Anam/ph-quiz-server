@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const QuizController = require("../../controller/quiz.controller");
-const checkAdminToken = require("../../middleware/tokenmanager/checkAdminToken");
-const checkPermission = require("../../middleware/tokenmanager/checkPermission");
+const checkAdminToken = require("../../middleware/tokenManager/checkAdminToken");
+const checkPermission = require("../../middleware/tokenManager/checkPermission");
 
 // Create a new quiz
 router.post("/", checkAdminToken, QuizController.createQuiz);

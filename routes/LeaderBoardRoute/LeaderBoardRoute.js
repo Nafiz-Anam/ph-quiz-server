@@ -1,5 +1,5 @@
 const LeaderBoardController = require("../../controller/leaderboardController");
-const checkPermission = require("../../middleware/tokenmanager/checkPermission");
+const checkPermission = require("../../middleware/tokenManager/checkPermission");
 
 const router = require("express").Router();
 

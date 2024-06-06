@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const UserController = require("../../controller/userController");
-const checkPermission = require("../../middleware/tokenmanager/checkPermission");
-const checkAdminToken = require("../../middleware/tokenmanager/checkAdminToken");
+const checkAdminToken = require("../../middleware/tokenManager/checkAdminToken");
+const checkPermission = require("../../middleware/tokenManager/checkPermission");
 
 // Get a single user by ID
 router.get("/", checkAdminToken, UserController.list);
