@@ -1,111 +1,146 @@
-# Study Routine Planner
+# Real-Time Analytics Platform
 
-## Project Objectives
+This is a real-time analytics platform built using the MERN stack. The platform gathers data from various sources, processes it in real-time, and provides insights through an API. This project includes user authentication, quiz management, leaderboard, and detailed analytics.
 
-The Study Routine Planner is designed to help students effectively manage their study time alongside other commitments such as classes, work, and personal activities. The primary goal is to maximize study effectiveness by allocating study tasks into a weekly schedule based on task priority and available time slots, ensuring a balanced and achievable study plan.
+## Features
 
-## Architecture Overview
+- **User Authentication**: Register and login with JWT authentication.
+- **Quiz Management**: Create, update, delete quizzes with multiple-choice questions.
+- **Quiz Participation**: Users can participate in quizzes and get their scores.
+- **Leaderboard**: Displays top users based on their scores.
+- **Real-Time Analytics**: Provides real-time data aggregation and insights.
+- **WebSockets**: Real-time updates for active users and analytics.
+- **Dockerized Setup**: Easily deployable with Docker and Docker Compose.
 
-The Study Routine Planner is built on a microservices architecture, utilizing a React-based frontend for user interaction and a Node.js backend for handling the core logic and database interactions. The system calculates available study times by subtracting predefined commitments from a full week's schedule, sorts study tasks by priority and duration, and then allocates these tasks into the calculated available time slots.
+## Installation
 
-## Core Algorithm
+1. Clone the repository:
 
-<details>
-<summary>Click to expand the algorithm explanation</summary>
-
-### Step 1: Calculate Available Time Slots
-
--   Initially, all days are assumed to be fully available for study.
--   The algorithm subtracts blocked time slots from the full weekly schedule to calculate available time slots.
-
-### Step 2: Consolidate Available Time
-
--   Adjusts the available time slots for each day based on blocked time slots, accurately accounting for busy times.
-
-### Step 3: Sort Tasks by Priority and Duration
-
--   Sorts tasks by priority (high, medium, low) and duration, prioritizing important and shorter tasks.
-
-### Step 4: Allocate Tasks to Time Slots
-
--   Distributes tasks across available days, ensuring no single day is overloaded.
--   Prioritizes allocation based on task priority and available time, moving unallocated tasks to a review list.
-
-This algorithm ensures a balanced and realistic study schedule, accommodating existing commitments and prioritizing tasks effectively to maximize study time.
-
-</details>
-
-## Backend
-
--   **Node.js** for the server-side logic, providing a scalable and efficient runtime environment.
--   **MongoDB** as the database, offering flexible data storage for user profiles, study plans, and progress tracking.
--   **Express.js** framework to simplify the creation of RESTful API endpoints, facilitating communication between the frontend and backend.
--   **Authentication and authorization** implemented via **JWT** to ensure secure access to user-specific data.
-
-## Repo Link
-
-[Click](https://github.com/Nafiz-Anam/ph-study-routine-server) or visit here: https://github.com/Nafiz-Anam/ph-study-routine-server
-
-## Frontend
-
--   **Next.js** for building a user-friendly interface, enabling server-side rendering and static site generation for faster load times.
--   **React.js** for developing reusable UI components, ensuring a dynamic and responsive user experience.
--   **Tailwind CSS** for styling, providing a utility-first approach to design with minimal custom CSS.
--   **Redux Toolkit and RTK Query** for state management, simplifying data fetching, caching, and updating the UI reactively.
-
-## Repo Link
-
-[Click](https://github.com/Nafiz-Anam/ph-study-routine-client) or visit here: https://github.com/Nafiz-Anam/ph-study-routine-client
-
-## Deployment
-
--   Docker and Docker Compose installed on your system.
--   Basic knowledge of Docker, Node.js, and React.
-
-## Usage Instructions
-
-### Start with yarn or npm
-
-1. **Clone the repository**:
-
-    ```bash
-    git clone https://github.com/Nafiz-Anam/ph-study-planner
+    ```sh
+    git clone https://github.com/Nafiz-Anam/ph-quiz-server.git
+    cd ph-quiz-server
     ```
 
-2. **Install dependencies**:
-    - Backend:
-    ```bash
-    cd server && npm install
-    ```
-    - Frontend:
-    ```bash
-    cd client && npm install
-    ```
-3. **Start the application**:
-    - Backend: `npm start` within the `/server` directory.
-    - Frontend: `npm run dev` within the `/client` directory.
-4. **Access the application**: Open `http://localhost:3000` in your web browser for **frontend**. And `http://localhost:5000/api/v1` for **backend**.
+2. Install dependencies:
 
-### Start with Docker
-
--   Clone repo:
-
-    ```bash
-    git clone https://github.com/Nafiz-Anam/ph-study-planner
+    ```sh
+    yarn install
     ```
 
--   Run Docker compose build command
+3. Create a `.env` file in the root directory and add the following environment variables:
 
-    ```bash
-    docker compose build  --no-cache
+    ```env
+    NODE_ENV=development
+    PORT=8000
+    MONGODB_URI=mongodb://localhost:27017/ph-analytics
+    ACCESS_TOKEN_SECRET=your-secret-key
     ```
 
--   Run Docker compose up command:
+## Setup
 
-    ```bash
-    docker-compose up
+### Running Locally
+
+1. Start MongoDB:
+
+    ```sh
+    mongod
+    ```
+
+2. Start the server:
+
+    ```sh
+    yarn start
+    ```
+
+3. Access the server at `http://localhost:8000`.
+
+### Running with Docker
+
+1. Build and run the Docker containers:
+
+    ```sh
+    docker-compose up --build
+    ```
+
+2. Access the server at `http://localhost:8000` and MongoDB Express at `http://localhost:8081`.
+
+## Core Features
+
+### User Authentication
+
+- **Register**: `/v1/auth/register`
+  - Method: `POST`
+  - Body: `{ "full_name": "string", "email": "string", "password": "string" }`
+
+- **Login**: `/v1/auth/login`
+  - Method: `POST`
+  - Body: `{ "email": "string", "password": "string" }`
+
+### Quiz Management
+
+- **Create Quiz**: `/v1/quiz`
+  - Method: `POST`
+  - Body: `{ "title": "string", "questions": [{ "question": "string", "options": ["string"], "correct_option": "number" }] }`
+
+- **Get Quizzes**: `/v1/quiz`
+  - Method: `GET`
+
+### Quiz Participation
+
+- **Submit Quiz Result**: `/v1/quiz-result`
+  - Method: `POST`
+  - Body: `{ "userId": "string", "quizId": "string", "answers": ["number"] }`
+
+### Leaderboard
+
+- **Get Leaderboard**: `/v1/leaderboard`
+  - Method: `GET`
+
+### Real-Time Analytics
+
+- **Get Analytics**: `/v1/analytics`
+  - Method: `GET`
+  - Query Parameters: `interval=hourly|daily|monthly|yearly`
+  - Provides aggregated analytics data based on the specified interval.
+
+### WebSocket Events
+
+- **Active Users**: Real-time updates on the number of active users.
+- **Analytics Updates**: Real-time updates on analytics data.
+
+## Running Tests
+
+1. Install Jest and Supertest:
+
+    ```sh
+    yarn add --save-dev jest supertest
+    ```
+
+2. Run the tests:
+
+    ```sh
+    yarn test
     ```
 
 ## API Collection 👇
 
-https://documenter.getpostman.com/view/30501718/2sA2xh1Xnm
+<https://documenter.getpostman.com/view/30501718/2sA3XJjPyC>
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Contributing
+
+1. Fork the repository.
+2. Create your feature branch (`git checkout -b feature/fooBar`).
+3. Commit your changes (`git commit -m 'Add some fooBar'`).
+4. Push to the branch (`git push origin feature/fooBar`).
+5. Create a new Pull Request.
+
+## Acknowledgements
+
+- [Express](https://expressjs.com/)
+- [MongoDB](https://www.mongodb.com/)
+- [Node.js](https://nodejs.org/)
+- [Docker](https://www.docker.com/)
