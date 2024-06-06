@@ -36,6 +36,7 @@ const userValidation = {
                     "string.base": `"Role" should be of type 'text'.`,
                     "any.only": `"Role" should be either 'user' or 'admin'`,
                 }),
+            search: Joi.string().allow(null).optional(),
             page: Joi.number().integer().min(1).optional().messages({
                 "number.base": `"Page" should be of type 'number'.`,
                 "number.min": `"Page" should be greater than or equal to 1.`,
@@ -44,7 +45,7 @@ const userValidation = {
                 "number.base": `"Limit" should be of type 'number'.`,
                 "number.min": `"Limit" should be greater than or equal to 1.`,
             }),
-            sortBy: Joi.string().optional(),
+            sortBy: Joi.string().allow(null).optional(),
             order: Joi.string().valid("asc", "desc").optional().messages({
                 "string.base": `"Order" should be of type 'text'.`,
                 "any.only": `"Order" should be either 'asc' or 'desc'.`,

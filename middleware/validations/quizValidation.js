@@ -172,6 +172,7 @@ const quizValidation = {
                 "number.base": `"Limit" should be of type 'number'.`,
                 "number.min": `"Limit" should be greater than or equal to 1.`,
             }),
+            search: Joi.string().optional(),
             sortBy: Joi.string().optional(),
             order: Joi.string().valid("asc", "desc").optional().messages({
                 "string.base": `"Order" should be of type 'text'.`,
