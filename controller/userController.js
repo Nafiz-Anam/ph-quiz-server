@@ -3,7 +3,7 @@ const UserService = require("../service/user.service");
 var UserController = {
     details: async (req, res, next) => {
         try {
-            const userId = req?.params?.userId || req?.user?.id;
+            const userId = req?.params?.userId;
             if (!userId) {
                 return res
                     .status(400)
