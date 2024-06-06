@@ -14,7 +14,7 @@ RUN yarn install
 COPY . .
 
 # Expose port 5000 to the outside once the container has launched
-EXPOSE 5000
+EXPOSE 8000
 
 # Define the command to run your app using CMD which defines your runtime
 # Here we will use node to run the application
