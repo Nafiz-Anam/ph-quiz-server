@@ -60,19 +60,35 @@ const AnalyticsService = {
                         quizId: quiz._id,
                         createdAt: { $gte: startDate },
                     });
-                    const totalScore = results.reduce(
-                        (acc, result) => acc + result.score,
+
+                    const scores = results.map((r) => r.score);
+                    const totalScore = scores.reduce(
+                        (acc, score) => acc + score,
                         0
                     );
-                    const averageScore = totalScore / results.length || 0;
+                    const averageScore = totalScore / scores.length || 0;
                     const highestScore =
-                        results.length > 0
-                            ? Math.max(...results.map((r) => r.score))
-                            : 0;
+                        scores.length > 0 ? Math.max(...scores) : 0;
                     const lowestScore =
-                        results.length > 0
-                            ? Math.min(...results.map((r) => r.score))
-                            : 0;
+                        scores.length > 0 ? Math.min(...scores) : 0;
+
+                    // Calculate median score
+                    const sortedScores = scores.sort((a, b) => a - b);
+                    const medianScore =
+                        scores.length % 2 === 0
+                            ? (sortedScores[scores.length / 2 - 1] +
+                                  sortedScores[scores.length / 2]) /
+                              2
+                            : sortedScores[Math.floor(scores.length / 2)];
+
+                    // Calculate standard deviation
+                    const mean = averageScore;
+                    const variance =
+                        scores.reduce(
+                            (acc, score) => acc + Math.pow(score - mean, 2),
+                            0
+                        ) / scores.length;
+                    const standardDeviation = Math.sqrt(variance);
 
                     // Get question count for the quiz
                     const questionCount = quiz.questions.length;
@@ -86,6 +102,8 @@ const AnalyticsService = {
                         averageScore,
                         highestScore,
                         lowestScore,
+                        medianScore,
+                        standardDeviation,
                         totalParticipants,
                         questionCount,
                     };
